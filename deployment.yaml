@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metric-app
+  labels:
+    app: metric-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: metric-app
+  template:
+    metadata:
+      labels:
+        app: metric-app
+    spec:
+      imagePullSecrets:
+      - name: ecr-secret  
+      containers:
+      - name: metric-container
+        image: 905418090570.dkr.ecr.us-east-1.amazonaws.com/monitoring_app_image:latest  
+        ports:
+        - containerPort: 5000
